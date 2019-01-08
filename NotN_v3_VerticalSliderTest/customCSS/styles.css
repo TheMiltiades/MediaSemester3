@@ -1,0 +1,50 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.slider {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.slick-list{
+	margin-top: 2.5%;
+}
+
+.slick-slide {
+  margin: 0px 20px;
+  text-align: center;
+  transition: all ease-in-out .3s;
+  opacity: .2;
+}
+
+.slick-slide video{
+  height: 17vh;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.slick-active {
+  opacity: .5;
+}
+
+.slick-current {
+  opacity: 1;
+}
