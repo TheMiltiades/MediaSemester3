@@ -1,0 +1,75 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: white;
+}
+
+.background-image{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    background-image: url('../images/background.jpg');
+    width: 100vw;
+    height: 90vh;
+
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.slider {
+	width: 100%;
+	margin: 100px auto;
+}
+
+.slick-slide {
+  margin: 0px 20px;
+  text-align: center;
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+
+.slick-slide {
+  transition: all ease-in-out .3s;
+  opacity: .2;
+}
+
+.slick-active {
+  opacity: .5;
+}
+
+.slick-current {
+  opacity: 1;
+}
+
+video{
+	width: 100%;
+}
