@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Visualisatie van JSON data met standaard HTML5 en CSS3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+    <style>
+        .bar1 {
+            background-color: chartreuse;
+        }
+        .bar2 {
+            background-color: rebeccapurple;
+        }
+        .bar3 {
+            background-color: deeppink;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // wait until the entire document is loaded
+        $(document).ready(function () {
+
+            // use an AJAX call to load the static JSON data from the server
+            $.ajax({
+                        url: "crashes.json",
+                        dataType: "json",
+                        success: appendData // calls a function to handle the JSON data
+                    }
+            );
+
+            /**
+             * Appends new mobile OS data to the document.
+             *
+             * @param data  the JSON mobile usage data
+             */
+            function appendData(data) {
+                // in the property 'os' there is the actual array with the usage data per operating system (OS)
+                data.year.forEach(function (crashes) {
+                    // append data per OS (could be done more elegantly if we can expect data from more years)
+                    $('#content').append('<h2>' + crashes.Year + '</h2>')
+                            .append('<h3>50mph and less</h3><div>' + crashes.Fatal_Crashes_Under_Speed_Limit_Under_55_Mph + '</div>')
+                            .append('<h3>55mph and higher</h3><div>' + crashes.Fatal_Crashes_Under_Speed_Limit_55_Mph_Above + '</div>')
+                            .append('<h3>Unknown speed limit </h3><div>' + crashes.Fatal_Crashes_Under_Speed_Limit_Unknown + '</div>')
+                            .append('<h3>Total crashes </h3><div>' + crashes.Total_Fatal_Crashes + '</div>');
+
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;"</div>
+    <div id="content"></div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+var dataPoints = [];
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme:"light2",
+	animationEnabled: true,
+	title:{
+		text: "Fatal crashes per speed limit in USA"
+	},
+	axisY :{
+		includeZero: true,
+		title: "Number of fatalities",
+	},
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries
+	},
+	data: [{
+        type: "spline", 
+		showInLegend: true,
+		visible: true,
+        dataPoints: dataPoints
+    }]
+});
+    
+// use an AJAX call to load the static JSON data from the server
+            $.ajax({
+                        url: "crashes.json",
+                        dataType: "json",
+                        success: appendData // calls a function to handle the JSON data
+                    }
+            );
+
+            /**
+             * Appends new mobile OS data to the document.
+             *
+             * @param data  the JSON mobile usage data
+             */
+            function appendData(data) {
+                // in the property 'os' there is the actual array with the usage data per operating system (OS)
+                data.year.forEach(function (crashes) {
+                    dataPoints.push({name: crashes.Year, label: crashes.Year, x: crashes.Year, y: crashes.Total_Fatal_Crashes});
+                });
+                chart.render();
+            }
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+console.log(dataPoints);
+})
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+</body>
+</html>
